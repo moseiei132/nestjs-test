@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { UserService } from 'src/users/services/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from 'src/users/repositories/user.repository';
@@ -32,7 +31,7 @@ export class AuthService {
     }
 
     async register(data: CreateUserDto){
-        console.log(`${data.username} ${data.password} `);
+        // console.log(`${data.username} ${data.password} `);
         data.password = await bcrypt.hash(data.password, 10);
         return this.userRepo.save(data);
     }
