@@ -1,18 +1,19 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
-import { InjectRepository } from "@nestjs/typeorm";
-import { ForumRepository } from "./repositories/forum.repository";
+import { Controller, Get, Param } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
+import { ForumService } from './services/forum.service'
 
 @ApiTags('forumController')
 @Controller('forum')
-export class ForumController{
-    constructor(
-        @InjectRepository(ForumRepository)
-        private forumRepo: ForumRepository
-    ){}
+export class ForumController {
+  constructor(private forumService: ForumService) {}
 
-    @Get()
-    getForum(){
-        return this.forumRepo.find({relations: ['topics']});
-    }
+  @Get()
+  async getForums() {
+    return this.forumService.getForums()
+  }
+
+  @Get('/:id')
+  async getForum(@Param('id') id: number) {
+    return this.forumService.getForum(id)
+  }
 }
