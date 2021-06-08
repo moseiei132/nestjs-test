@@ -18,6 +18,6 @@ export class Forum {
   @Column({ name: 'updated_at' })
   updatedAt: Date
 
-  @OneToMany((type) => Topic, (topic) => topic.forum)
+  @OneToMany(() => Topic, (topic) => topic.forum)
   topics: Topic[]
 }

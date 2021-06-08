@@ -28,11 +28,11 @@ export class Post {
   @Column({ name: 'updated_at' })
   updatedAt: Date
 
-  @ManyToOne((type) => User, (user) => user.topics)
+  @ManyToOne(() => User, (user) => user.topics)
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @ManyToOne((type) => Topic, (topic) => topic.posts)
+  @ManyToOne(() => Topic, (topic) => topic.posts)
   @JoinColumn({ name: 'topic_id' })
   topic: Topic
 }

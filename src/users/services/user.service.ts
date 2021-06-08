@@ -11,17 +11,18 @@ export class UserService {
     private userRepo: UserRepository,
   ) {}
 
-  async getAllUser() {
+  async getAllUser():Promise<TUser[]> {
     const users = await this.userRepo.find()
     return plainToClass(TUser, users)
   }
 
-  async getUserInfo(id: number) {
+  async getUserInfo(id: number):Promise<TUser> {
     const user = await this.userRepo.findOne(id)
     return plainToClass(TUser, user)
   }
 
-  findByUsername(username: string) {
-    return this.userRepo.findOne({ username: username })
+  findByUsername(username: string):TUser {
+    const user = this.userRepo.findOne({ username: username })
+    return plainToClass(TUser, user)
   }
 }

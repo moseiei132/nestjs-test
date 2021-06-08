@@ -12,12 +12,12 @@ export class ForumService {
     private forumRepo: ForumRepository,
   ) {}
 
-  async getForums() {
+  async getForums():Promise<TForum[]> {
     const forums = await this.forumRepo.find()
     return plainToClass(TForum, forums)
   }
 
-  async getForum(id: number) {
+  async getForum(id: number):Promise<TForum> {
     const forum = await this.forumRepo.findOne(id)
     return plainToClass(TForum, forum)
   }

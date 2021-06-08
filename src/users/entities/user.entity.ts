@@ -19,9 +19,9 @@ export class User {
   @Column({ name: 'updated_at' })
   updatedAt: Date
 
-  @OneToMany((type) => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.user)
   posts: Post[]
 
-  @OneToMany((type) => Topic, (topic) => topic.user)
+  @OneToMany(() => Topic, (topic) => topic.user)
   topics: Topic[]
 }

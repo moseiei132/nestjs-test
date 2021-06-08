@@ -11,17 +11,17 @@ export class PostService {
     private postRepo: PostRepository,
   ) {}
 
-  async getPosts() {
+  async getPosts():Promise<TPost[]> {
     const posts = await this.postRepo.find({ order: { createdAt: 'ASC' } })
     return plainToClass(TPost, posts)
   }
 
-  async getPost(id: number) {
+  async getPost(id: number):Promise<TPost> {
     const post = await this.postRepo.findOne(id)
     return plainToClass(TPost, post)
   }
 
-  async getPostsByTopicId(topicId: number) {
+  async getPostsByTopicId(topicId: number):Promise<TPost[]> {
     const posts = await this.postRepo.find({
       where: { topicId },
       order: { createdAt: 'ASC' },

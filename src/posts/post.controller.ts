@@ -1,8 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { InjectRepository } from '@nestjs/typeorm'
-import { PostRepository } from './repositories/post.repository'
 import { PostService } from './services/post.service'
+import { TPost } from './transformers/post.transformer'
 
 @ApiTags('PostController')
 @Controller('post')
@@ -10,17 +9,17 @@ export class PostController {
   constructor(private postService: PostService) {}
 
   @Get()
-  getPosts() {
+  getPosts():Promise<TPost[]> {
     return this.postService.getPosts()
   }
 
   @Get('/:id')
-  getTopic(@Param('id') id: number) {
+  getPost(@Param('id') id: number):Promise<TPost> {
     return this.postService.getPost(id)
   }
 
   @Get('byTopicId/:topicId')
-  getPostsByTopicId(@Param('topicId') topicId: number) {
+  getPostsByTopicId(@Param('topicId') topicId: number):Promise<TPost[]> {
     return this.postService.getPostsByTopicId(topicId)
   }
 }

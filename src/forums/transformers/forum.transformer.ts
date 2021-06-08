@@ -1,5 +1,4 @@
 import { Exclude } from 'class-transformer'
-import { TTopic } from 'src/topics/transformers/topic.transformer'
 
 export class TForum {
   id: number

@@ -30,14 +30,14 @@ export class Topic {
   @Column({ name: 'updated_at' })
   updatedAt: Date
 
-  @ManyToOne((type) => Forum, (forum) => forum.topics)
+  @ManyToOne(() => Forum, (forum) => forum.topics)
   @JoinColumn({ name: 'forum_id' })
   forum: Forum
 
-  @OneToMany((type) => Post, (post) => post.topic)
+  @OneToMany(() => Post, (post) => post.topic)
   posts: Post[]
 
-  @ManyToOne((type) => User, (user) => user.topics)
+  @ManyToOne(() => User, (user) => user.topics)
   @JoinColumn({ name: 'user_id' })
   user: User[]
 }

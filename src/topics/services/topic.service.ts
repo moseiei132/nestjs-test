@@ -11,17 +11,17 @@ export class TopicService {
     private topicRepo: TopicRepository,
   ) {}
 
-  async getTopics() {
+  async getTopics():Promise<TTopic[]> {
     const topics = await this.topicRepo.find({ order: { createdAt: 'ASC' } })
     return plainToClass(TTopic, topics)
   }
 
-  async getTopic(id: number) {
+  async getTopic(id: number):Promise<TTopic> {
     const topic = await this.topicRepo.findOne(id)
     return plainToClass(TTopic, topic)
   }
 
-  async getTopicsByForumId(forumId: number) {
+  async getTopicsByForumId(forumId: number):Promise<TTopic[]> {
     const topics = await this.topicRepo.find({
       where: { forumId },
       order: { createdAt: 'ASC' },
