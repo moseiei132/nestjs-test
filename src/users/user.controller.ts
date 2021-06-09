@@ -14,23 +14,23 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('info')
-  getInfo(@UseUser() user: User):User {
+  getInfo(@UseUser() user: User): User {
     return user
   }
 
   @Get()
-  getAllUser():TUser {
+  getAllUser(): TUser {
     const users = plainToClass(TUser, this.userService.getAllUser())
     return users
   }
 
   @Get('/:id')
-  getUserInfo(@Param('id') id: number):Promise<TUser> {
+  getUserInfo(@Param('id') id: number): Promise<TUser> {
     return this.userService.getUserInfo(id)
   }
 
   @Get('findByUsername/:username')
-  findByEmail(@Param('username') username: string):TUser {
+  findByEmail(@Param('username') username: string): TUser {
     return this.userService.findByUsername(username)
   }
 }

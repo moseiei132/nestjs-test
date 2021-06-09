@@ -11,7 +11,7 @@ import { AuthService } from './services/auth.service'
 @ApiTags('AuthController')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Post('login')
   async login(@Body() data: LoginDto): Promise<IAccessToken> {

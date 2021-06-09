@@ -1,5 +1,5 @@
 import { Forum } from 'src/forums/entities/forum.entity'
-import { Post } from 'src/posts/entities/post.entity'
+import { PostEntity } from 'src/posts/entities/post.entity'
 import { User } from 'src/users/entities/user.entity'
 import {
   Column,
@@ -34,8 +34,8 @@ export class Topic {
   @JoinColumn({ name: 'forum_id' })
   forum: Forum
 
-  @OneToMany(() => Post, (post) => post.topic)
-  posts: Post[]
+  @OneToMany(() => PostEntity, (post) => post.topic)
+  posts: PostEntity[]
 
   @ManyToOne(() => User, (user) => user.topics)
   @JoinColumn({ name: 'user_id' })

@@ -1,4 +1,4 @@
-import { Post } from 'src/posts/entities/post.entity'
+import { PostEntity } from 'src/posts/entities/post.entity'
 import { Topic } from 'src/topics/entities/topic.entity'
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
@@ -19,8 +19,8 @@ export class User {
   @Column({ name: 'updated_at' })
   updatedAt: Date
 
-  @OneToMany(() => Post, (post) => post.user)
-  posts: Post[]
+  @OneToMany(() => PostEntity, (post) => post.user)
+  posts: PostEntity[]
 
   @OneToMany(() => Topic, (topic) => topic.user)
   topics: Topic[]

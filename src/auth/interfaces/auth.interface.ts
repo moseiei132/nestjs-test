@@ -1,9 +1,9 @@
-import { IUser } from "src/users/interfaces/user.interface";
+import { IUser } from 'src/users/interfaces/user.interface'
 
-export interface IAccessToken{
+export interface IAccessToken {
   accessToken: string
 }
 
-export interface RequestUser extends Request{
-    user: IUser
+export interface RequestUser extends Request {
+  user: IUser
 }

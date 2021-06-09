@@ -9,7 +9,7 @@ import {
 } from 'typeorm'
 
 @Entity('posts')
-export class Post {
+export class PostEntity {
   @PrimaryGeneratedColumn()
   id: number
 

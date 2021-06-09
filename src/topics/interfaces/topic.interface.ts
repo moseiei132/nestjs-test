@@ -1,10 +1,18 @@
-import { IUser } from 'src/users/interfaces/user.interface'
-
 export interface ITopic {
-  id: number
   forumId: number
   name: string
-  user: IUser[]
-  createdAt: Date
-  updatedAt: Date
+  userId: number
+  body: string
+}
+
+export interface IDeleteTopic {
+  topicId: number
+  userId: number
+}
+
+export interface IEditTopic {
+  topicId: number
+  userId: number
+  name: string
+  body: string
 }

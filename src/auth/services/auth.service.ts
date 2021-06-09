@@ -15,7 +15,7 @@ export class AuthService {
     @InjectRepository(UserRepository)
     private userRepo: UserRepository,
   ) {}
-  async login(data: LoginDto):Promise<IAccessToken> {
+  async login(data: LoginDto): Promise<IAccessToken> {
     const user = await this.userRepo.findOne({ username: data.username })
     if (user) {
       const isMatch = await bcrypt.compare(data.password, user.password)
@@ -32,7 +32,7 @@ export class AuthService {
     throw new UnauthorizedException('USER DOES NOT EXIST')
   }
 
-  async register(userData: CreateUserDto):Promise<CreateUserDto & User> {
+  async register(userData: CreateUserDto): Promise<CreateUserDto & User> {
     userData.password = await bcrypt.hash(userData.password, 10)
     return this.userRepo.save(userData)
   }
