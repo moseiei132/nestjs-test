@@ -22,13 +22,13 @@ export class TopicService {
 
   async getTopics(): Promise<TTopic[]> {
     const topics = await this.topicRepo.find({ order: { createdAt: 'ASC' } })
-    if(topics.length === 0)throw new NotFoundException('Topics not found')
+    if (topics.length === 0) throw new NotFoundException('Topics not found')
     return plainToClass(TTopic, topics)
   }
 
   async getTopic(id: number): Promise<TTopic> {
     const topic = await this.topicRepo.findOne(id)
-    if(!topic)throw new NotFoundException('Topic not found')
+    if (!topic) throw new NotFoundException('Topic not found')
     return plainToClass(TTopic, topic)
   }
 
@@ -37,7 +37,7 @@ export class TopicService {
       where: { forumId },
       order: { createdAt: 'ASC' },
     })
-    if(topics.length === 0)throw new NotFoundException('Topics not found')
+    if (topics.length === 0) throw new NotFoundException('Topics not found')
     return plainToClass(TTopic, topics)
   }
 
@@ -58,7 +58,8 @@ export class TopicService {
   async deleteTopic(data: IDeleteTopic): Promise<DeleteResult> {
     const topicData = await this.topicRepo.findOne({ id: data.topicId })
     if (!topicData) throw new NotFoundException('Topic not found')
-    if (topicData.userId !== data.userId) throw new NotAcceptableException('User not owner')
+    if (topicData.userId !== data.userId)
+      throw new NotAcceptableException('User not owner')
     await this.postService.deletePosts(data.topicId)
     const deletedTopic = await this.topicRepo.delete({ id: data.topicId })
     return deletedTopic
@@ -67,7 +68,8 @@ export class TopicService {
   async editTopic(data: IEditTopic): Promise<Topic> {
     const topicData = await this.topicRepo.findOne({ id: data.topicId })
     if (!topicData) throw new NotFoundException('Topic not found')
-    if (topicData.userId !== data.userId) throw new NotAcceptableException('User not owner')
+    if (topicData.userId !== data.userId)
+      throw new NotAcceptableException('User not owner')
     const editedTopic = await this.topicRepo.save({
       id: data.topicId,
       name: data.name,
