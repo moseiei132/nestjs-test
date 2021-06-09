@@ -1,6 +1,4 @@
-import { Forum } from 'src/forums/entities/forum.entity'
-import { PostEntity } from 'src/posts/entities/post.entity'
-import { User } from 'src/users/entities/user.entity'
+
 import {
   Column,
   Entity,
@@ -9,6 +7,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { Forum } from '../../forums/entities/forum.entity'
+import { PostEntity } from '../../posts/entities/post.entity'
+import { User } from '../../users/entities/user.entity'
 
 @Entity('topics')
 export class Topic {
@@ -32,12 +33,12 @@ export class Topic {
 
   @ManyToOne(() => Forum, (forum) => forum.topics)
   @JoinColumn({ name: 'forum_id' })
-  forum: Forum
+  forum?: Forum
 
   @OneToMany(() => PostEntity, (post) => post.topic)
-  posts: PostEntity[]
+  posts?: PostEntity[]
 
   @ManyToOne(() => User, (user) => user.topics)
   @JoinColumn({ name: 'user_id' })
-  user: User[]
+  user?: User[]
 }

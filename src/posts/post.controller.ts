@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiTags } from '@nestjs/swagger'
-import { UseUser } from 'src/common/decorators/user.decorator'
-import { User } from 'src/users/entities/user.entity'
+import { UseUser } from '../common/decorators/user.decorator'
+import { User } from '../users/entities/user.entity'
+
 import { PostBodyDto } from './dtos/post.dto'
 import { PostEntity } from './entities/post.entity'
 import { PostService } from './services/post.service'

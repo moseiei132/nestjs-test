@@ -1,5 +1,4 @@
-import { Topic } from 'src/topics/entities/topic.entity'
-import { User } from 'src/users/entities/user.entity'
+
 import {
   Column,
   Entity,
@@ -7,6 +6,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
+import { Topic } from '../../topics/entities/topic.entity'
+import { User } from '../../users/entities/user.entity'
 
 @Entity('posts')
 export class PostEntity {

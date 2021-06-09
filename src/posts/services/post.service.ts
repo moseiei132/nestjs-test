@@ -20,6 +20,7 @@ export class PostService {
 
   async getPosts(): Promise<TPost[]> {
     const posts = await this.postRepo.find({ order: { createdAt: 'ASC' } })
+    if(posts.length !== 0)throw new NotFoundException('Posts not found')
     return plainToClass(TPost, posts)
   }
 
@@ -65,8 +66,8 @@ export class PostService {
 
   async editPost(data: IEditPost): Promise<PostEntity> {
     const postData = await this.getPost(data.postId)
-    if (!postData) throw NotFoundException
-    if (postData.userId !== data.userId) throw NotAcceptableException
+    if (!postData) throw new NotFoundException('Post not found')
+    if (postData.userId !== data.userId) throw new NotAcceptableException('User not owner')
     const editedPost = await this.postRepo.save({
       id: data.postId,
       body: data.body,

@@ -1,5 +1,5 @@
-import { Topic } from 'src/topics/entities/topic.entity'
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Topic } from '../../topics/entities/topic.entity'
 
 @Entity('forums')
 export class Forum {

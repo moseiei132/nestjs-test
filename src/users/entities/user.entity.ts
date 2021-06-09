@@ -1,6 +1,7 @@
-import { PostEntity } from 'src/posts/entities/post.entity'
-import { Topic } from 'src/topics/entities/topic.entity'
+
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { PostEntity } from '../../posts/entities/post.entity'
+import { Topic } from '../../topics/entities/topic.entity'
 
 @Entity('users') //table name in database
 export class User {
