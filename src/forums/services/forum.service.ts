@@ -16,13 +16,13 @@ export class ForumService {
 
   async getForums(): Promise<TForum[]> {
     const forums = await this.forumRepo.find()
-    if(forums.length === 0)throw new NotFoundException('Forums not found')
+    if (forums.length === 0) throw new NotFoundException('Forums not found')
     return plainToClass(TForum, forums)
   }
 
   async getForum(id: number): Promise<TForum> {
     const forum = await this.forumRepo.findOne(id)
-    if(!forum)throw new NotFoundException('Forum not found')
+    if (!forum) throw new NotFoundException('Forum not found')
     return plainToClass(TForum, forum)
   }
 

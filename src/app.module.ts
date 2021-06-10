@@ -16,7 +16,6 @@ import { TopicModule } from './topics/topic.module'
 import { UserModule } from './users/user.module'
 import { PostModule } from './posts/post.module'
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({

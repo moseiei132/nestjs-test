@@ -35,7 +35,7 @@ export class PostService {
       where: { topicId },
       order: { createdAt: 'ASC' },
     })
-    if(posts.length === 0) throw new NotFoundException('Posts not found')
+    if (posts.length === 0) throw new NotFoundException('Posts not found')
     return plainToClass(TPost, posts)
   }
 
@@ -44,7 +44,7 @@ export class PostService {
       where: { topicId },
       order: { createdAt: 'ASC' },
     })
-    if(!post)throw new NotFoundException('Post not found')
+    if (!post) throw new NotFoundException('Post not found')
     return plainToClass(TPost, post)
   }
 
@@ -59,13 +59,12 @@ export class PostService {
 
   async deletePosts(topicId: number): Promise<DeleteResult> {
     const postsData = await this.getPostsByTopicId(topicId)
-    if(postsData.length === 0)throw new NotFoundException('Posts not found')
+    if (postsData.length === 0) throw new NotFoundException('Posts not found')
     const deletedPosts = this.postRepo.delete({ topicId })
     return deletedPosts
   }
 
   async deletePost(postId: number): Promise<DeleteResult> {
-    
     const deletedPost = this.postRepo.delete({ id: postId })
     return deletedPost
   }

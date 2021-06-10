@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { UseUser } from '../common/decorators/user.decorator'
 import { User } from '../users/entities/user.entity'
 
@@ -16,6 +16,7 @@ export class PostController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
+  @ApiCreatedResponse()
   async createPost(
     @UseUser() user: User,
       @Body() postDto: PostBodyDto,
@@ -28,16 +29,19 @@ export class PostController {
   }
 
   @Get()
+  @ApiOkResponse()
   getPosts(): Promise<TPost[]> {
     return this.postService.getPosts()
   }
 
   @Get('/:id')
+  @ApiOkResponse()
   getPost(@Param('id') id: number): Promise<TPost> {
     return this.postService.getPost(id)
   }
 
   @Get('byTopicId/:topicId')
+  @ApiOkResponse()
   getPostsByTopicId(@Param('topicId') topicId: number): Promise<TPost[]> {
     return this.postService.getPostsByTopicId(topicId)
   }

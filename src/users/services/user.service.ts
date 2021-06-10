@@ -13,19 +13,19 @@ export class UserService {
 
   async getAllUser(): Promise<TUser[]> {
     const users = await this.userRepo.find()
-    if(users.length === 0)throw new NotFoundException('Users not found')
+    if (users.length === 0) throw new NotFoundException('Users not found')
     return plainToClass(TUser, users)
   }
 
   async getUserInfo(id: number): Promise<TUser> {
     const user = await this.userRepo.findOne(id)
-    if(!user)throw new NotFoundException('User not found')
+    if (!user) throw new NotFoundException('User not found')
     return plainToClass(TUser, user)
   }
 
   async findByUsername(username: string): Promise<TUser> {
     const user = this.userRepo.findOne({ username: username })
-    if(!user)throw new NotFoundException('User not found')
+    if (!user) throw new NotFoundException('User not found')
     return plainToClass(TUser, user)
   }
 }

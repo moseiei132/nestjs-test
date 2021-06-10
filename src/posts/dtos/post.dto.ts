@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger'
 import {
   IsNotEmpty,
   IsNumber,
@@ -9,10 +10,12 @@ import {
 export class CreatePostDto {
   @IsNumber()
   @IsNotEmpty()
+  @ApiProperty()
   topicId: number
 
   @IsNumber()
   @IsNotEmpty()
+  @ApiProperty()
   userId: number
 
   @IsNotEmpty()
@@ -21,12 +24,14 @@ export class CreatePostDto {
   @MaxLength(256, {
     message: 'Body is too long',
   })
+  @ApiProperty()
   body: string
 }
 
 export class PostBodyDto {
   @IsNumber()
   @IsNotEmpty()
+  @ApiProperty()
   topicId: number
 
   @IsNotEmpty()
@@ -35,5 +40,6 @@ export class PostBodyDto {
   @MaxLength(256, {
     message: 'Body is too long',
   })
+  @ApiProperty()
   body: string
 }

@@ -1,5 +1,5 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { User } from './entities/user.entity'
 import { UserService } from './services/user.service'
 import { UseUser } from '../common/decorators/user.decorator'
@@ -19,17 +19,20 @@ export class UserController {
   }
 
   @Get()
+  @ApiOkResponse()
   getAllUser(): TUser {
     const users = plainToClass(TUser, this.userService.getAllUser())
     return users
   }
 
   @Get('/:id')
+  @ApiOkResponse()
   getUserInfo(@Param('id') id: number): Promise<TUser> {
     return this.userService.getUserInfo(id)
   }
 
   @Get('findByUsername/:username')
+  @ApiOkResponse()
   findByEmail(@Param('username') username: string): Promise<TUser> {
     return this.userService.findByUsername(username)
   }

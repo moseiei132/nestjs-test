@@ -146,18 +146,16 @@ describe('TopicService', () => {
         .mockReturnValue(
           mockTopic({ id: 10, forumId: 20, userId: 3, name: 'topic10' }),
         )
-      TopicRepository.prototype.save = jest
-        .fn()
-        .mockReturnValue(
-          mockTopic({
-            id: 10,
-            forumId: 20,
-            userId: 3,
-            name: '5555',
-            createdAt: undefined,
-            updatedAt: undefined,
-          }),
-        )
+      TopicRepository.prototype.save = jest.fn().mockReturnValue(
+        mockTopic({
+          id: 10,
+          forumId: 20,
+          userId: 3,
+          name: '5555',
+          createdAt: undefined,
+          updatedAt: undefined,
+        }),
+      )
       postService.editPost = jest.fn()
       postService.getFirstPostByTopicId = jest
         .fn()
@@ -172,14 +170,36 @@ describe('TopicService', () => {
     })
   })
 
-  describe('createTopic',() => {
+  describe('createTopic', () => {
     it('should be success', async () => {
-      TopicRepository.prototype.save = jest.fn().mockReturnValue(mockTopic({ id: 11, forumId: 22, userId: 33, name: 'topic10' , createdAt: undefined, updatedAt: undefined}))
+      TopicRepository.prototype.save = jest
+        .fn()
+        .mockReturnValue(
+          mockTopic({
+            id: 11,
+            forumId: 22,
+            userId: 33,
+            name: 'topic10',
+            createdAt: undefined,
+            updatedAt: undefined,
+          }),
+        )
       postService.createPost = jest.fn()
-      const result = await topicService.createTopic({forumId: 22, name: 'topic10', body: 'hellio', userId: 33})
+      const result = await topicService.createTopic({
+        forumId: 22,
+        name: 'topic10',
+        body: 'hellio',
+        userId: 33,
+      })
       expect(postService.createPost).toBeCalledTimes(1)
-      expect(result).toEqual({ id: 11, forumId: 22, userId: 33, name: 'topic10', createdAt: undefined, updatedAt: undefined })
-      
+      expect(result).toEqual({
+        id: 11,
+        forumId: 22,
+        userId: 33,
+        name: 'topic10',
+        createdAt: undefined,
+        updatedAt: undefined,
+      })
     })
   })
 })
