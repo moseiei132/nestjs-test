@@ -1,4 +1,5 @@
 import { Test } from '@nestjs/testing'
+import { PostRepository } from '../../posts/repositories/post.repository'
 import { PostService } from '../../posts/services/post.service'
 import { mockTopic } from '../factories/topic.factory'
 import { TopicRepository } from '../repositories/topic.repository'
@@ -88,21 +89,21 @@ describe('TopicService', () => {
     it('should be throw error Topic not found', async () => {
       TopicRepository.prototype.findOne = jest.fn()
       await expect(
-        topicService.deleteTopic({ topicId: 1234, userId: 3456 })
+        topicService.deleteTopic({ topicId: 1234, userId: 3456 }),
       ).rejects.toThrow('Topic not found')
     })
     it('should be throw error User not owner', async () => {
-      TopicRepository.prototype.findOne = jest.fn().mockReturnValue(
-        mockTopic({ userId: 1234 })
-      )
+      TopicRepository.prototype.findOne = jest
+        .fn()
+        .mockReturnValue(mockTopic({ userId: 1234 }))
       await expect(
-        topicService.deleteTopic({ topicId: 1234, userId: 3456 })
+        topicService.deleteTopic({ topicId: 1234, userId: 3456 }),
       ).rejects.toThrow('User not owner')
     })
     it('should be deleted success', async () => {
-      TopicRepository.prototype.findOne = jest.fn().mockReturnValue(
-        mockTopic({ userId: 1234 })
-      )
+      TopicRepository.prototype.findOne = jest
+        .fn()
+        .mockReturnValue(mockTopic({ userId: 1234 }))
       postService.deletePosts = jest.fn()
       TopicRepository.prototype.delete = jest.fn()
       await topicService.deleteTopic({ userId: 1234, topicId: 6543 })
@@ -112,4 +113,74 @@ describe('TopicService', () => {
     })
   })
 
+  describe('editTopic', () => {
+    it('should be edit throw error Topic not found', async () => {
+      TopicRepository.prototype.findOne = jest.fn()
+      await expect(
+        topicService.editTopic({
+          topicId: 1,
+          userId: 3,
+          name: 'test',
+          body: 'body data',
+        }),
+      ).rejects.toThrow('Topic not found')
+    })
+
+    it('should be edit throw error User not owner', async () => {
+      TopicRepository.prototype.findOne = jest
+        .fn()
+        .mockReturnValue(
+          mockTopic({ id: 10, forumId: 20, userId: 3, name: 'topic10' }),
+        )
+      await expect(
+        topicService.editTopic({
+          topicId: 10,
+          userId: 1,
+          name: 'test',
+          body: 'body data',
+        }),
+      ).rejects.toThrow('User not owner')
+    })
+    it('should be success', async () => {
+      TopicRepository.prototype.findOne = jest
+        .fn()
+        .mockReturnValue(
+          mockTopic({ id: 10, forumId: 20, userId: 3, name: 'topic10' }),
+        )
+      TopicRepository.prototype.save = jest
+        .fn()
+        .mockReturnValue(
+          mockTopic({
+            id: 10,
+            forumId: 20,
+            userId: 3,
+            name: '5555',
+            createdAt: undefined,
+            updatedAt: undefined,
+          }),
+        )
+      postService.editPost = jest.fn()
+      postService.getFirstPostByTopicId = jest
+        .fn()
+        .mockReturnValue({ id: 123, userId: 3, topicId: 10, body: 'hello' })
+      const result = await topicService.editTopic({
+        topicId: 10,
+        userId: 3,
+        name: '5555',
+        body: 'hello',
+      })
+      expect(result).toEqual({ id: 10, forumId: 20, userId: 3, name: '5555' })
+    })
+  })
+
+  describe('createTopic',() => {
+    it('should be success', async () => {
+      TopicRepository.prototype.save = jest.fn().mockReturnValue(mockTopic({ id: 11, forumId: 22, userId: 33, name: 'topic10' , createdAt: undefined, updatedAt: undefined}))
+      postService.createPost = jest.fn()
+      const result = await topicService.createTopic({forumId: 22, name: 'topic10', body: 'hellio', userId: 33})
+      expect(postService.createPost).toBeCalledTimes(1)
+      expect(result).toEqual({ id: 11, forumId: 22, userId: 33, name: 'topic10', createdAt: undefined, updatedAt: undefined })
+      
+    })
+  })
 })

@@ -1,4 +1,3 @@
-
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { PostEntity } from '../../posts/entities/post.entity'
 import { Topic } from '../../topics/entities/topic.entity'

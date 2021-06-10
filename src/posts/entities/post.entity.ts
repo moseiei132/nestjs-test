@@ -1,4 +1,3 @@
-
 import {
   Column,
   Entity,
@@ -31,9 +30,9 @@ export class PostEntity {
 
   @ManyToOne(() => User, (user) => user.topics)
   @JoinColumn({ name: 'user_id' })
-  user: User
+  user?: User
 
   @ManyToOne(() => Topic, (topic) => topic.posts)
   @JoinColumn({ name: 'topic_id' })
-  topic: Topic
+  topic?: Topic
 }
