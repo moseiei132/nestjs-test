@@ -1,7 +1,7 @@
 import { PostEntity } from '../entities/post.entity'
 import * as faker from 'faker'
 
-export const mockPost = (partial: Partial<PostEntity> = undefined) => {
+export const mockPost = (partial: Partial<PostEntity> = {}): PostEntity => {
   const post: PostEntity = {
     id: faker.datatype.number(9999),
     topicId: faker.datatype.number(9999),

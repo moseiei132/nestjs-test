@@ -1,5 +1,4 @@
 import { Test } from '@nestjs/testing'
-import { PostRepository } from '../../posts/repositories/post.repository'
 import { PostService } from '../../posts/services/post.service'
 import { mockTopic } from '../factories/topic.factory'
 import { TopicRepository } from '../repositories/topic.repository'
