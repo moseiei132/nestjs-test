@@ -1,12 +1,13 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
-import { UserRepository } from 'src/users/repositories/user.repository'
 import { LoginDto } from '../dtos/auth.dto'
 import * as bcrypt from 'bcrypt'
-import { CreateUserDto } from 'src/users/create-user.dto'
 import { IAccessToken } from '../interfaces/auth.interface'
-import { User } from 'src/users/entities/user.entity'
+import { User } from '../../users/entities/user.entity'
+import { UserRepository } from '../../users/repositories/user.repository'
+import { CreateUserDto } from '../../users/create-user.dto'
+
 
 @Injectable()
 export class AuthService {
@@ -29,7 +30,7 @@ export class AuthService {
         }),
       }
     }
-    throw new UnauthorizedException('USER DOES NOT EXIST')
+    throw new UnauthorizedException('User does not exist')
   }
 
   async register(userData: CreateUserDto): Promise<CreateUserDto & User> {

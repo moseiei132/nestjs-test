@@ -15,10 +15,7 @@ import { ForumModule } from './forums/forum.module'
 import { TopicModule } from './topics/topic.module'
 import { UserModule } from './users/user.module'
 import { PostModule } from './posts/post.module'
-import { ForumRepository } from './forums/repositories/forum.repository'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { TopicRepository } from './topics/repositories/topic.repository'
-import { PostRepository } from './posts/repositories/post.repository'
+
 
 @Module({
   imports: [
@@ -31,9 +28,6 @@ import { PostRepository } from './posts/repositories/post.repository'
     TopicModule,
     ForumModule,
     PostModule,
-    TypeOrmModule.forFeature([ForumRepository]),
-    TypeOrmModule.forFeature([TopicRepository]),
-    TypeOrmModule.forFeature([PostRepository]),
   ],
   controllers: [AppController],
   providers: [
