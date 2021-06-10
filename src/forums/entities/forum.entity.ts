@@ -19,5 +19,5 @@ export class Forum {
   updatedAt: Date
 
   @OneToMany(() => Topic, (topic) => topic.forum)
-  topics: Topic[]
+  topics?: Topic[]
 }
