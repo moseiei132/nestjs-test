@@ -20,8 +20,8 @@ export class User {
   updatedAt: Date
 
   @OneToMany(() => PostEntity, (post) => post.user)
-  posts: PostEntity[]
+  posts?: PostEntity[]
 
   @OneToMany(() => Topic, (topic) => topic.user)
-  topics: Topic[]
+  topics?: Topic[]
 }
